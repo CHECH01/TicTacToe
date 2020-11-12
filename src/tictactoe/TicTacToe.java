@@ -10,9 +10,8 @@ public class TicTacToe {
 	
 	
 	public boolean isWinner(String [][] board) {
-		
-		for (int i = 0; i <= 4; i++) {
-			for (int j = 0; j <= 4; j++) {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++) {
 				
 				if ( j == 0) {// horizontal
 					//if (board[i][j].contentEquals(board[i][j + 1]) && board[i][j].contentEquals(board[i][j + 2]) && board[i][j].contentEquals(board[i][j + 3]) && board[i][j].contentEquals(board[i][j + 4]))
@@ -24,8 +23,8 @@ public class TicTacToe {
 							aux2++;
 						else
 							aux =  false;
-					}while ( aux == true && aux2<=4);
-					if(aux2 == 5)
+					}while ( aux == true && aux2<board.length);
+					if(aux2 == board.length)
 						return true;
 				}
 				
@@ -39,8 +38,8 @@ public class TicTacToe {
 							aux2++;
 						else
 							aux =  false;
-					}while ( aux == true && aux2<=4);
-					if(aux2 == 5)
+					}while ( aux == true && aux2<board.length);
+					if(aux2 == board.length)
 						return true;
 				}/*
 				if ((i == 1 && j == 1)) {// diagonal
@@ -75,9 +74,9 @@ public class TicTacToe {
 			myBoard.printBoard();
 			isWinner = isWinner(myBoard.getBoard());
 			aux++;
-		}while(isWinner == false && aux <= 25);
+		}while(isWinner == false && aux <= myBoard.getBoard().length*myBoard.getBoard().length);
 		
-		if(aux == 26 && isWinner == false)
+		if(aux == (myBoard.getBoard().length*myBoard.getBoard().length+1) && isWinner == false)
 			System.out.print("DRAW!");
 		else
 			System.out.print(mark+" WINNER!!!");	

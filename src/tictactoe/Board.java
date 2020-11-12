@@ -26,8 +26,6 @@ public class Board {
 				aux++;
 			}
 		}
-		System.out.println("AUX: "+aux);
-		
 	}
 	public void mark(String pos, String mark) {
 		for (int i = 0; i <= ROWS; i++)
@@ -87,6 +85,7 @@ public class Board {
 		positions.add("G");//6
 		positions.add("H");//7
 		positions.add("I");//8
+	
 	//-----------4x4-------------
 		positions.add("J");//9
 		positions.add("K");//10
