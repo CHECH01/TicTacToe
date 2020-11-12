@@ -1,37 +1,48 @@
 package tictactoe;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TicTacToe {
 	
 	private Scanner input = new Scanner(System.in);
 	private Board myBoard = new Board();
-	ArrayList<String> myArray = new ArrayList<String>();
 	
-	public TicTacToe() {
-		initializeArray();
-	}
 	
-	public void printBoard(String[][] guiBoard) {
-		for (int i = 0; i <= 8; i++) {
-			for (int j = 0; j <= 16; j++)
-				System.out.print(guiBoard[i][j]);
-			System.out.println("");
-		}
-	}
 	
 	public boolean isWinner(String [][] board) {
-		for (int i = 0; i <= 2; i++)
-			for (int j = 0; j <= 2; j++) {
-				if ((i == 0 && j == 0) || (i == 1 && j == 0) || (i == 2 && j == 0)) {// horizontal
-					if (board[i][j].contentEquals(board[i][j + 1]) && board[i][j].contentEquals(board[i][j + 2]))
+		
+		for (int i = 0; i <= 4; i++) {
+			for (int j = 0; j <= 4; j++) {
+				
+				if ( j == 0) {// horizontal
+					//if (board[i][j].contentEquals(board[i][j + 1]) && board[i][j].contentEquals(board[i][j + 2]) && board[i][j].contentEquals(board[i][j + 3]) && board[i][j].contentEquals(board[i][j + 4]))
+						//return true;
+					boolean aux = true;
+					int aux2 = 1;
+					do {
+						if(board[i][j].contentEquals(board[i][j+aux2]))
+							aux2++;
+						else
+							aux =  false;
+					}while ( aux == true && aux2<=4);
+					if(aux2 == 5)
 						return true;
 				}
-				if ((i == 0 && j == 0) || (i == 0 && j == 1) || (i == 0 && j == 2)) {// vertical
-					if (board[i][j].contentEquals(board[i + 1][j]) && board[i][j].contentEquals(board[i + 2][j]))
+				
+				if (i == 0 ) {// vertical
+					/*if (board[i][j].contentEquals(board[i + 1][j]) && board[i][j].contentEquals(board[i + 2][j])&& board[i][j].contentEquals(board[i + 3][j])&& board[i][j].contentEquals(board[i + 4][j]))
+						return true;*/
+					boolean aux = true;
+					int aux2 = 1;
+					do {
+						if(board[i][j].contentEquals(board[i+aux2][j]))
+							aux2++;
+						else
+							aux =  false;
+					}while ( aux == true && aux2<=4);
+					if(aux2 == 5)
 						return true;
-				}
+				}/*
 				if ((i == 1 && j == 1)) {// diagonal
 					if (board[i][j].contentEquals(board[i - 1][j - 1])
 							&& board[i][j].contentEquals(board[i + 1][j + 1]))
@@ -39,14 +50,16 @@ public class TicTacToe {
 					else if (board[i][j].contentEquals(board[i - 1][j + 1])
 							&& board[i][j].contentEquals(board[i + 1][j - 1]))
 						return true;
-				}
+				}*/
 
 			}
+		}
+		
 		return false;
 	}
 	
 	public void play() {
-		printBoard(myBoard.getGuiBoard());
+		myBoard.printBoard();
 		String mark = "";
 		int aux = 1;
 		boolean isWinner = false;
@@ -59,12 +72,12 @@ public class TicTacToe {
 				System.out.print("Player X move: ");
 			}
 			myBoard.mark(checkMark(),mark);
-			printBoard(myBoard.getGuiBoard());
+			myBoard.printBoard();
 			isWinner = isWinner(myBoard.getBoard());
 			aux++;
-		}while(isWinner == false && aux < 10);
+		}while(isWinner == false && aux <= 25);
 		
-		if(aux == 10 && isWinner == false)
+		if(aux == 26 && isWinner == false)
 			System.out.print("DRAW!");
 		else
 			System.out.print(mark+" WINNER!!!");	
@@ -76,10 +89,10 @@ public class TicTacToe {
 		
 		pos = input.nextLine();
 		do {
-			for(int i = 0 ; i < myArray.size();i++)
-				if(pos.contentEquals(myArray.get(i))) {
+			for(int i = 0 ; i < myBoard.getPositions().size();i++)
+				if(pos.contentEquals(myBoard.getPositions().get(i))) {
 					aux = true;
-					myArray.remove(myArray.indexOf(pos));
+					myBoard.removeArrayPosition(pos);
 					break;
 				}
 			if(aux == false) {
@@ -90,17 +103,5 @@ public class TicTacToe {
 		}while(aux == false);
 		
 		return pos;
-	}
-	
-	public void initializeArray() {
-		myArray.add("A");
-		myArray.add("B");
-		myArray.add("C");
-		myArray.add("D");
-		myArray.add("E");
-		myArray.add("F");
-		myArray.add("G");
-		myArray.add("H");
-		myArray.add("I");
 	}
 }
