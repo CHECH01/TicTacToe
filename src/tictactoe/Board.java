@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Board {
 	
-	private static final int BOARD_SIZE = 10;
+	private static final int BOARD_SIZE = 3;
 	private static final int ROWS = BOARD_SIZE*3;
 	private static final int COLUMNS = BOARD_SIZE*6;
 	
@@ -62,7 +62,6 @@ public class Board {
 			k += 6;
 		}
 		/*
-		System.out.println("J: " +j);
 		guiBoard[2][3] 	= positions.get(0);
 		guiBoard[2][9] 	= positions.get(1);
 		guiBoard[2][15] = positions.get(2);
@@ -74,9 +73,9 @@ public class Board {
 		guiBoard[8][15] = positions.get(8);*/
 	}
 	public void initializeArrayPositions() {
-		for(int i = 1; i <= BOARD_SIZE*BOARD_SIZE; i++)
-			positions.add(" ");
-		/*
+//		for(int i = 1; i <= BOARD_SIZE*BOARD_SIZE; i++)
+			//positions.add(" ");
+		
 	//-----------3x3-------------
 		positions.add("A");//0
 		positions.add("B");//1
@@ -86,7 +85,7 @@ public class Board {
 		positions.add("F");//5
 		positions.add("G");//6
 		positions.add("H");//7
-		positions.add("I");//8*/
+		positions.add("I");//8
 /*	
 	//-----------4x4-------------
 		positions.add("J");//9
