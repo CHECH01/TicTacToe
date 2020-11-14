@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Board {
 	
-	private static final int BOARD_SIZE = 5;
+	private static final int BOARD_SIZE = 10;
 	private static final int ROWS = BOARD_SIZE*3;
 	private static final int COLUMNS = BOARD_SIZE*6;
 	
@@ -57,7 +57,6 @@ public class Board {
 				k = 3;
 				j += 3;
 			}
-			//System.out.println("J: " +j+", K: "+k+" I: "+i);
 			guiBoard[j][k] = positions.get(i);
 			
 			k += 6;
@@ -75,6 +74,9 @@ public class Board {
 		guiBoard[8][15] = positions.get(8);*/
 	}
 	public void initializeArrayPositions() {
+		for(int i = 1; i <= BOARD_SIZE*BOARD_SIZE; i++)
+			positions.add(" ");
+		/*
 	//-----------3x3-------------
 		positions.add("A");//0
 		positions.add("B");//1
@@ -84,8 +86,8 @@ public class Board {
 		positions.add("F");//5
 		positions.add("G");//6
 		positions.add("H");//7
-		positions.add("I");//8
-	
+		positions.add("I");//8*/
+/*	
 	//-----------4x4-------------
 		positions.add("J");//9
 		positions.add("K");//10
@@ -93,8 +95,8 @@ public class Board {
 		positions.add("M");//12
 		positions.add("N");//13
 		positions.add("Ö");//14
-		positions.add("P");//15
-	//-----------5x5-------------
+		positions.add("P");//15*/
+/*	//-----------5x5-------------
 		positions.add("Q");//16
 		positions.add("R");//17
 		positions.add("S");//18
@@ -103,7 +105,7 @@ public class Board {
 		positions.add("V");//21
 		positions.add("W");//22
 		positions.add("Y");//23
-		positions.add("Z");//24
+		positions.add("Z");//24*/
 	}
 	public void printBoard() {
 		for (int i = 0; i <= ROWS; i++) {
@@ -138,20 +140,22 @@ public class Board {
 		System.out.println("|  G  |  H  |  I  |");//8
 		System.out.println("|_____|_____|_____|");//9
 		
-					//		0123456789012345678901234
-		System.out.println("_________________________");//0
-		System.out.println("|     |     |     |     |");//1
-		System.out.println("|  A  |  B  |  C  |  D  |");//2
-		System.out.println("|_____|_____|_____|_____|");//3
-		System.out.println("|     |     |     |     |");//4
-		System.out.println("|  E  |  F  |  G  |  H  |");//5
-		System.out.println("|_____|_____|_____|_____|");//6
-		System.out.println("|     |     |     |     |");//7
-		System.out.println("|  I  |  J  |  K  |  L  |");//8
-		System.out.println("|_____|_____|_____|_____|");//9
-		System.out.println("|     |     |     |     |");//10
-		System.out.println("|  M  |  N  |  O  |  P  |");//11
-		System.out.println("|_____|_____|_____|_____|");//12
+
+					//		01234567890123456789012345		
+		System.out.println("    1     2     3     4   ");//0
+		System.out.println(" _________________________");//1
+		System.out.println(" |     |     |     |     |");//2
+		System.out.println("1|  -  |  -  |  -  |  -  |");//3
+		System.out.println(" |_____|_____|_____|_____|");//4
+		System.out.println(" |     |     |     |     |");//5
+		System.out.println("2|  -  |  -  |  -  |  -  |");//6
+		System.out.println(" |_____|_____|_____|_____|");//7
+		System.out.println(" |     |     |     |     |");//8
+		System.out.println("3|  -  |  -  |  -  |  -  |");//9
+		System.out.println(" |_____|_____|_____|_____|");//10
+		System.out.println(" |     |     |     |     |");//11
+		System.out.println("4|  -  |  -  |  -  |  -  |");//12
+		System.out.println(" |_____|_____|_____|_____|");//13
 	}
 	
 }
