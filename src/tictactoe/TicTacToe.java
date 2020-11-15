@@ -7,8 +7,6 @@ public class TicTacToe {
 	private Scanner input = new Scanner(System.in);
 	private Board myBoard = new Board();
 	
-	
-	
 	public boolean isWinner(String [][] board) {
 		boolean isWinner = false;
 		first:
@@ -16,38 +14,37 @@ public class TicTacToe {
 			for (int j = 0; j < board.length; j++) {
 				
 				if ( j == 0 && isWinner == false)// horizontal
-					isWinner = check(i,j,board,0,1);
+					isWinner = checkWin(i,j,board,0,1);
 				
 				if (i == 0 && isWinner == false) // vertical
-					isWinner = check(i,j,board,1,0);
+					isWinner = checkWin(i,j,board,1,0);
 				
 				if (i == 0 && j == 0 && isWinner == false) // diagonal 1
-					isWinner = check(i,j,board,1,1);
+					isWinner = checkWin(i,j,board,1,1);
 				
 				if (i == 0 && j == board.length-1 && isWinner == false) // diagonal 2
-					isWinner = check(i,j,board,1,-1);
+					isWinner = checkWin(i,j,board,1,-1);
 				
-				if(isWinner == true)
+				if(isWinner)
 					break first;
 
 			}
 		}
 		return isWinner;
 	}
-	public boolean check(int i, int j, String board[][],int aux1,int aux2) {
-		boolean aux = true;
-		int aux3=aux1;
-		int aux4=aux2;
+	public boolean checkWin(int i, int j, String board[][],int aux1,int aux2) {
+		int aux3 = aux1;
+		int aux4 = aux2;
 		int cont = 1;
 		do {
 			if(board[i][j].contentEquals(board[i+aux3][j+aux4])) {
 				cont++;
 				aux3+=aux1;
 				aux4+=aux2;
-			}
-			else
-				aux =  false;
-		}while ( aux == true && cont<board.length);
+			}else
+				break;
+		}while (cont < board.length);
+		
 		if(cont == board.length)
 			return true;
 		else 
@@ -55,49 +52,56 @@ public class TicTacToe {
 	}
 	
 	public void play() {
-		myBoard.printBoard();
 		String mark = "";
-		int aux = 1;
+		int maxMoves = (int)Math.pow(myBoard.getBoard().length, 2);
+		int contMoves = 0;
 		boolean isWinner = false;
+		
+		myBoard.initializeArrayPositions();
+		myBoard.generateEmptyBoard();
+		myBoard.generateEmptyGUIBoard();
+		myBoard.printBoard();
+		
 		do {
-			if(aux % 2 == 0) {
-				mark = "O";
-				System.out.print("Player O move: ");
-			}else {
+			if(contMoves % 2 == 0) {
 				mark = "X";
 				System.out.print("Player X move: ");
+			}else {
+				mark = "O";
+				System.out.print("Player O move: ");
 			}
-			myBoard.mark(checkMark(),mark);
+			
+			myBoard.mark(getPosition(),mark);
 			myBoard.printBoard();
 			isWinner = isWinner(myBoard.getBoard());
-			aux++;
-		}while(isWinner == false && aux <= myBoard.getBoard().length*myBoard.getBoard().length);
+			contMoves++;
+		}while(!isWinner && contMoves < maxMoves);
 		
-		if(aux == (myBoard.getBoard().length*myBoard.getBoard().length+1) && isWinner == false)
+		if(contMoves == maxMoves && !isWinner)
 			System.out.print("DRAW!");
 		else
 			System.out.print(mark+" WINNER!!!");	
 	}
 	
-	public String checkMark() {
-		String pos = "";
-		boolean aux = false;
+	public String getPosition() {
+		String position = "";
+		boolean wrongMove = true;
 		
-		pos = input.nextLine();
+		position = input.nextLine();
 		do {
 			for(int i = 0 ; i < myBoard.getPositions().size();i++)
-				if(pos.contentEquals(myBoard.getPositions().get(i))) {
-					aux = true;
-					myBoard.removeArrayPosition(pos);
+				if(position.contentEquals(myBoard.getPositions().get(i))) {
+					wrongMove = false;
+					myBoard.removeArrayPosition(position);
 					break;
 				}
-			if(aux == false) {
+			if(wrongMove) {
 				System.out.print("Wrong move, try again: ");
-				pos = input.nextLine();
+				position = input.nextLine();
 			}
 				
-		}while(aux == false);
+		}while(wrongMove);
 		
-		return pos;
+		return position;
 	}
 }

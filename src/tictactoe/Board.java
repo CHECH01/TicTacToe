@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Board {
 	
-	private static final int BOARD_SIZE = 5;
+	private static final int BOARD_SIZE = 3;
 	private static final int ROWS = BOARD_SIZE*3;
 	private static final int COLUMNS = BOARD_SIZE*6;
 	
@@ -12,20 +12,13 @@ public class Board {
 	private String[][] board 	= new String[BOARD_SIZE][BOARD_SIZE];
 	ArrayList<String> positions = new ArrayList<String>();
 	
-	public Board() {
-		initializeArrayPositions();
-		generateEmptyBoard();
-		generateEmptyGUIBoard();
-		
-	}
 	public void generateEmptyBoard() {
-		int aux = 0;
-		for(int i = 0; i < BOARD_SIZE; i++) {
+		int k = 0;
+		for(int i = 0; i < BOARD_SIZE; i++) 
 			for(int j = 0; j < BOARD_SIZE; j++) {
-				board[i][j] = positions.get(aux);
-				aux++;
+				board[i][j] = positions.get(k);
+				k++;
 			}
-		}
 	}
 	public void mark(String pos, String mark) {
 		for (int i = 0; i <= ROWS; i++)
@@ -50,24 +43,25 @@ public class Board {
 				else
 					guiBoard[i][j] = " ";
 			}
-		
+		fillBoard();
+	}
+	public void fillBoard() {
 		int j = 2, k = 3;
 		for(int i = 0 ; i < positions.size(); i++) {
 			if(i != 0 && i % BOARD_SIZE == 0) {
-				k = 3;
+				k  = 3;
 				j += 3;
 			}
 			guiBoard[j][k] = positions.get(i);
-			
 			k += 6;
 		}
 	}
 	public void initializeArrayPositions() {
-		for(int i = 1; i <= BOARD_SIZE*BOARD_SIZE; i++)
-			positions.add(String.valueOf(i));
-		//String prueba = "ABCDEFGHIJKLMNÑPQRSTUVWYZ0123456789abcdefghijklmnÑpqrstuvwyz*-%$";
-		//for (int i = 0;i < BOARD_SIZE*BOARD_SIZE; i++)
-			//positions.add(String.valueOf(prueba.charAt(i)));
+		String stringPositions = "ABCDEFGHIJKLMNÑPQRSTUVWYZ0123456789abcdefghijklmnÑpqrstuvwyz*-%$";
+		for (int i = 0;i < BOARD_SIZE*BOARD_SIZE; i++)
+			positions.add(String.valueOf(stringPositions.charAt(i)));
+//		for(int i = 1; i <= BOARD_SIZE*BOARD_SIZE; i++)
+//		positions.add(String.valueOf(i));
 	}
 	public void printBoard() {
 		for (int i = 0; i <= ROWS; i++) {
