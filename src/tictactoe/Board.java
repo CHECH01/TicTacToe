@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Board {
 	
 	private static final int BOARD_SIZE = 3;
-	private static final int ROWS = BOARD_SIZE*3;
-	private static final int COLUMNS = BOARD_SIZE*6;
+	private static final int ROWS 		= BOARD_SIZE*3;
+	private static final int COLUMNS 	= BOARD_SIZE*6;
 	
 	private String[][] guiBoard = new String[ROWS+1][COLUMNS+1];
 	private String[][] board 	= new String[BOARD_SIZE][BOARD_SIZE];
@@ -79,8 +79,6 @@ public class Board {
 	}
 	
 	public ArrayList<String> getPositions() {
-		
 		return positions;
-		
 	}
 }

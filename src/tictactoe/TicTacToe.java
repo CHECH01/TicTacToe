@@ -89,7 +89,7 @@ public class TicTacToe {
 		
 		position = input.nextLine();
 		do {
-			for(int i = 0 ; i < myBoard.getPositions().size();i++)
+			for(int i = 0 ; i < myBoard.getPositions().size(); i++)
 				if(position.contentEquals(myBoard.getPositions().get(i))) {
 					wrongMove = false;
 					myBoard.removeArrayPosition(position);
